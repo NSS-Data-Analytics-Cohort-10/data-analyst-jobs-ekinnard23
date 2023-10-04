@@ -43,6 +43,7 @@ WHERE review_count Between 500 AND 1000
 SELECT location AS state, AVG(star_rating) AS avg_rating
 FROM data_analyst_jobs
 GROUP BY location
+ORDER BY avg_rating DESC
 
 
 
@@ -66,9 +67,20 @@ WHERE location = 'CA'
 SELECT company, AVG(star_rating) AS avg_rating
 FROM data_analyst_jobs
 GROUP BY company
-HAVING avg(star_rating) > 5000
+HAVING SUM(review_count) > 5000
+
+
+-71
 
 -- 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
+
+SELECT company, AVG(star_rating) AS avg_rating
+FROM data_analyst_jobs
+GROUP BY company
+HAVING SUM(review_count) > 5000
+ORDER BY avg_rating DESC
+
+--American Express
 
 -- 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
