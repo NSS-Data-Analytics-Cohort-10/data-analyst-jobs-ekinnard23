@@ -27,7 +27,7 @@ WHERE location = 'KY' OR location = 'TN'
 -- 4.	How many postings in Tennessee have a star rating above 4?
 SELECT COUNT (location)
 FROM data_analyst_jobs
-WHERE location = 'TN' and star_rating > 4
+WHERE location = 'TN' AND star_rating > 4
 
 --3
 
@@ -47,16 +47,53 @@ GROUP BY location
 
 
 -- 7.	Select unique job titles from the data_analyst_jobs table. How many are there?
+SELECT COUNT(Distinct title) AS job_titles
+FROM data_analyst_jobs
+
+--881
+
 
 -- 8.	How many unique job titles are there for California companies?
+SELECT COUNT(Distinct title) AS job_titles
+FROM data_analyst_jobs
+WHERE location = 'CA'
+
+
+--230
 
 -- 9.	Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. How many companies are there with more that 5000 reviews across all locations?
+
+SELECT company, AVG(star_rating) AS avg_rating
+FROM data_analyst_jobs
+GROUP BY company
+HAVING avg(star_rating) > 5000
 
 -- 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
 
 -- 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
+SELECT (title)
+FROM data_analyst_jobs
+WHERE title LIKE ('%nalyst%')
+
+SELECT COUNT(title)
+FROM data_analyst_jobs
+WHERE title LIKE ('%nalyst%')
+								 
+
+--1640
+
 -- 12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
+
+SELECT title
+FROM data_analyst_jobs
+WHERE (title) NOT LIKE ('%nalyst%') AND (title) NOT LIKE ('%nalytics%')
+
+SELECT COUNT(title)
+FROM data_analyst_jobs
+WHERE (title) NOT LIKE ('%nalyst%') AND (title) NOT LIKE ('%nalytics%')
+
+--34
 
 -- **BONUS:**
 -- You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
