@@ -84,28 +84,28 @@ ORDER BY avg_rating DESC
 
 -- 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
-SELECT (title)
+SELECT DISTINCT (title)
 FROM data_analyst_jobs
 WHERE title LIKE ('%nalyst%')
 
-SELECT COUNT(title)
+SELECT COUNT (DISTINCT(title))
 FROM data_analyst_jobs
 WHERE title LIKE ('%nalyst%')
 								 
 
---1640
+--757
 
 -- 12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
 
-SELECT title
+SELECT DISTINCT title
+FROM data_analyst_jobs
+WHERE UPPER(title) NOT LIKE ('%ANALYST%') AND UPPER(title) NOT LIKE ('&analytics&')
+
+SELECT COUNT(DISTINCT UPPER(title))
 FROM data_analyst_jobs
 WHERE (title) NOT LIKE ('%nalyst%') AND (title) NOT LIKE ('%nalytics%')
 
-SELECT COUNT(title)
-FROM data_analyst_jobs
-WHERE (title) NOT LIKE ('%nalyst%') AND (title) NOT LIKE ('%nalytics%')
-
---34
+--22
 
 -- **BONUS:**
 -- You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
