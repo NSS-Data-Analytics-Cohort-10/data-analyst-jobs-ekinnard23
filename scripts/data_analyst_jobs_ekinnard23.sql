@@ -109,6 +109,32 @@ WHERE (title) NOT LIKE ('%nalyst%') AND (title) NOT LIKE ('%nalytics%')
 
 -- **BONUS:**
 -- You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
+
+SELECT domain, COUNT(domain) as domain_count
+FROM data_analyst_jobs
+WHERE days_since_posting >= 21 and skill = 'SQL'
+GROUP BY domain
+
 --  - Disregard any postings where the domain is NULL. 
+
+SELECT domain, COUNT(domain) as domain_count
+FROM data_analyst_jobs
+WHERE days_since_posting >= 21 AND skill = 'SQL' AND domain IS NOT NULL
+GROUP BY domain
+
 --  - Order your results so that the domain with the greatest number of `hard to fill` jobs is at the top. 
+
+SELECT domain, COUNT(domain) as domain_count
+FROM data_analyst_jobs
+WHERE days_since_posting >= 21 AND skill = 'SQL' AND domain IS NOT NULL
+GROUP BY domain
+ORDER BY domain_count DESC
+
 --   - Which three industries are in the top 4 on this list? How many jobs have been listed for more than 3 weeks for each of the top 4?
+
+SELECT domain, COUNT(domain) as domain_count
+FROM data_analyst_jobs
+WHERE days_since_posting >= 21 AND skill = 'SQL' AND domain IS NOT NULL
+GROUP BY domain
+ORDER BY domain_count DESC
+LIMIT 4;
